@@ -2,19 +2,19 @@ import json
 
 class SimuladorDeFi:
     def __init__(self):
-        # Configurações do Motor
+        # Configurações
         self.TARGET_LTV = 0.75
         self.MAX_LTV_RISCO = 0.82
         self.TAXA_PLATAFORMA = 0.001
         
-        # Estado do Sistema
+        # Estado
         self.supply = 0.0
         self.borrow = 0.0
         self.wallet = 0.0
         self.target_supply = 0.0
         self.target_wallet = 0.0
         
-        # Controle Interno
+        # Controle
         self.supply_acumulado = 0.0
         self.ciclos = 0
         self.log_txt = []
@@ -37,34 +37,26 @@ class SimuladorDeFi:
             print("Erro: Números inválidos.")
             exit()
 
-    # ==============================================================================
-    # AS ESTRATÉGIAS (O "CÉREBRO" DO ROBÔ)
-    # ==============================================================================
+    # ====================== ESTRATÉGIAS ======================
 
     def _estrategia_1_sacar_lucro(self):
-        """Foca em encher a wallet usando margem de LTV"""
         op_supply = self.supply_acumulado
         
-        # Calcula quanto podemos pegar emprestado novo
         capacidade_total = (self.supply + op_supply) * self.TARGET_LTV
         op_borrow = max(0, capacidade_total - self.borrow)
         
-        # Tudo vira saque
         return {
             "supply": op_supply,
             "borrow": op_borrow,
             "repay": 0.0,
             "reinvest": 0.0,
-            "lucro_sacado": op_borrow, # Tenta sacar tudo
+            "lucro_sacado": op_borrow,
             "nome": "Estratégia 1 (Sacar Lucro)"
         }
 
     def _estrategia_3_flash_loan(self):
-        """
-        Tenta alavancagem máxima. 
-        Se falhar por falta de taxa, ativa o FALLBACK (Plano B).
-        """
-        # 1. Tenta calcular o salto ideal
+        """Tenta alavancagem máxima via Flash Loan."""
+        # Calcular salto ideal
         capacidade_total = (self.supply + self.supply_acumulado) / (1 - self.TARGET_LTV)
         capacidade_total = min(capacidade_total, self.target_supply)
         
@@ -75,38 +67,31 @@ class SimuladorDeFi:
         taxas_estimadas = (delta_borrow + delta_supply) * self.TAXA_PLATAFORMA
         lucro_bruto = delta_borrow - delta_supply
         
-        # 2. Verifica Viabilidade (Tem dinheiro pra taxa?)
+        # Verifica viabilidade
         pode_pagar_com_lucro = lucro_bruto > taxas_estimadas
         pode_pagar_com_wallet = self.wallet > (taxas_estimadas - lucro_bruto)
         
         if delta_supply > 0.001 and (pode_pagar_com_lucro or pode_pagar_com_wallet):
-            # SUCESSO: Executa Flash Loan
             return {
                 "supply": 0.0,
                 "borrow": delta_borrow,
                 "repay": 0.0,
-                "reinvest": delta_supply, # O flash loan entra aqui
+                "reinvest": delta_supply,
                 "lucro_sacado": lucro_bruto, 
                 "nome": "Estratégia 3 (Flash Loan Agressivo)"
             }
         else:
-            # FALHA -> FALLBACK PARA ESTRATÉGIA 5 (FORMIGUINHA)
-            # O cliente vê que o robô tentou, mas adaptou
+            # Fallback para estratégia conservadora
             print(f"  > [AVISO] Flash Loan caro demais. Ativando Plano B (Formiguinha)...")
             return self._estrategia_5_reinvestir_acumulado(fallback=True)
 
     def _estrategia_5_reinvestir_acumulado(self, fallback=False):
-        """
-        Apenas deposita o que tem acumulado.
-        Se for Fallback (Plano B), usa a Wallet para tentar destravar.
-        """
         nome = "Estratégia 5 (Passo de Formiga)" if fallback else "Estratégia 5 (Reinvestir)"
         
         op_supply = self.supply_acumulado
         
-        # CORREÇÃO CRÍTICA: Se for fallback e não tiver acumulado, usa a wallet!
+        # Se for fallback e não tiver acumulado, usa a wallet
         if fallback and op_supply == 0 and self.wallet > 0:
-            # Usa 90% da wallet para deixar espaço para taxas
             op_supply = self.wallet * 0.90
             
         return {
@@ -119,19 +104,13 @@ class SimuladorDeFi:
         }
 
     def _estrategia_7_repagar_inteligente(self):
-        """
-        Calcula o máximo que dá para pagar sem quebrar a wallet.
-        """
         caixa_total = self.supply_acumulado + self.wallet
         
-        # Reserva dinheiro para a taxa com folga de 1% (Factor 1.01)
-        # Isso evita o erro de "-0.0000"
+        # Reserva dinheiro para a taxa com folga
         valor_maximo_repagavel = caixa_total / (1 + self.TAXA_PLATAFORMA * 1.5)
         
-        # O menor entre o que devo e o que tenho
         op_repay = min(self.borrow, valor_maximo_repagavel)
         
-        # Se for muito pouco, não faz nada
         if op_repay < 0.0001: op_repay = 0.0
             
         return {
@@ -142,12 +121,9 @@ class SimuladorDeFi:
             "lucro_sacado": 0.0, 
             "nome": "Estratégia 7 (Repagamento Seguro)"
         }
-    # ==============================================================================
-    # MOTOR DE DECISÃO E EXECUÇÃO
-    # ==============================================================================
+    # ====================== MOTOR DE DECISÃO ======================
 
     def decidir_proximo_passo(self):
-        """O Cérebro que escolhe qual função chamar"""
         ltv = self.borrow / self.supply if self.supply > 0 else 0
         falta_supply = self.target_supply - self.supply
         
@@ -173,11 +149,10 @@ class SimuladorDeFi:
     def executar_ciclo(self):
         self.ciclos += 1
         
-        # 1. ANÁLISE PRÉVIA (Logs de "Pensamento")
+        # Análise prévia
         ltv_pre = (self.borrow / self.supply * 100) if self.supply > 0 else 0
         falta_meta = max(0, self.target_supply - self.supply)
         
-        # Decidir
         plano = self.decidir_proximo_passo()
         
         # Recuperar valores
@@ -191,23 +166,23 @@ class SimuladorDeFi:
         supply_usado_neste_ciclo = self.supply_acumulado if plano['nome'] != "Estratégia 3" else 0
         self.supply_acumulado = 0 
         
-        # CÁLCULO FINANCEIRO DETALHADO
+        # Cálculos financeiros
         volume_total = op_borrow + op_repay + op_reinvest + op_supply
         taxas = volume_total * self.TAXA_PLATAFORMA
         
-        # Separação visual de taxas (para o log denso)
+        # Separação visual de taxas
         taxa_flash_est = 0.0
         if "Flash Loan" in plano['nome']:
-            taxa_flash_est = taxas * 0.9 # Simula que maior parte é fee de flash
+            taxa_flash_est = taxas * 0.9
             
         delta_wallet = op_lucro_sacado - taxas
         
-        # Proteção Wallet
+        # Ajuste para repagamento
         if plano['nome'] == "Estratégia 7 (Repagamento Seguro)":
             custo_repay = max(0, op_repay - supply_usado_neste_ciclo)
             delta_wallet -= custo_repay
 
-        # Segurança
+        # Verificação de segurança
         if self.wallet + delta_wallet < -0.00000001:
             print(f"  > [CRÍTICO] Abortar ciclo {self.ciclos}. Wallet insuficiente.")
             self.supply_acumulado = supply_usado_neste_ciclo
@@ -223,11 +198,10 @@ class SimuladorDeFi:
         if plano['nome'] not in ["Estratégia 1 (Sacar Lucro)", "Estratégia 3 (Flash Loan Agressivo)"]:
              self.supply_acumulado += max(0, delta_wallet)
 
-        # --- GERAÇÃO DO LOG DENSO ---
+        # Logs
         ltv_pos = (self.borrow / self.supply * 100) if self.supply > 0 else 0
         saude = (self.supply * 0.74) / self.borrow if self.borrow > 0 else 999.0
         
-        # O bloco abaixo é o que vai "impressionar" pela quantidade de dados
         log_denso = (
             f"\n{'='*80}\n"
             f"CICLO {self.ciclos:03d} | ESTRATÉGIA: {plano['nome'].upper()}\n"
@@ -330,17 +304,13 @@ class SimuladorDeFi:
             json.dump(self.log_json, f, indent=4)
         print("\nArquivos de log denso gerados: 'resultado_operacoes_denso.txt' e 'operacoes_denso.json'")
 
-# ==============================================================================
-# AUTOMATIZADOR DE TESTES (BATCH RUNNER)
-# Cole isso no final do seu script, DEPOIS da classe SimuladorDeFi
-# ==============================================================================
+# ====================== TESTES AUTOMÁTICOS ======================
 
 class SimuladorAutomatico(SimuladorDeFi):
     def __init__(self, dados_cenario):
         super().__init__()
         self.dados_teste = dados_cenario
 
-    # SOBRESCREVENDO o método que pede input para não travar o código
     def carregar_dados(self):
         print(f"\n{'>'*20} INICIANDO TESTE AUTOMÁTICO: {self.dados_teste['nome']} {'<'*20}")
         self.supply = float(self.dados_teste['supply'])
@@ -350,7 +320,6 @@ class SimuladorAutomatico(SimuladorDeFi):
         self.target_wallet = float(self.dados_teste['target_wallet'])
 
 def rodar_bateria_testes():
-    # LISTA DE CENÁRIOS (Aqui você configura seus testes)
     cenarios = [
         {
             "nome": "CENÁRIO 1: O Salto Perfeito (Flash Loan)",
@@ -399,10 +368,6 @@ def rodar_bateria_testes():
     for i, dados in enumerate(cenarios):
         bot = SimuladorAutomatico(dados)
         
-        # Redirecionando os arquivos para não sobrescrever o mesmo txt toda hora
-        # (Opcional: se quiser arquivos separados, teria que alterar a classe pai)
-        # Por enquanto, vai salvar tudo no mesmo, mas o print vai mostrar separado.
-        
         bot.rodar()
         print(f"\n[FIM DO {dados['nome']}]")
         print("-" * 80)
@@ -410,11 +375,4 @@ def rodar_bateria_testes():
         print("\n")
 
 if __name__ == "__main__":
-    # Comente a linha abaixo se quiser rodar manual
-    # bot = SimuladorDeFi()
-    # bot.rodar()
-    
-    # Descomente a linha abaixo para rodar automático
     rodar_bateria_testes()
-
-
