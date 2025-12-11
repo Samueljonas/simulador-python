@@ -295,12 +295,12 @@ class SimuladorDeFi:
 
         print(resultado_final)
         
-        with open("resultado_operacoes_denso.txt", "w", encoding='utf-8') as f:
+        with open("resultado_operacoes_denso.txt", "a", encoding='utf-8') as f:
             for linha in self.log_txt:
                 f.write(linha)
             f.write(resultado_final)
                 
-        with open("operacoes_denso.json", "w", encoding='utf-8') as f:
+        with open("operacoes_denso.json", "a", encoding='utf-8') as f:
             json.dump(self.log_json, f, indent=4)
         print("\nArquivos de log denso gerados: 'resultado_operacoes_denso.txt' e 'operacoes_denso.json'")
 
@@ -320,6 +320,11 @@ class SimuladorAutomatico(SimuladorDeFi):
         self.target_wallet = float(self.dados_teste['target_wallet'])
 
 def rodar_bateria_testes():
+    # 1. Limpar o arquivo de log antigo antes de começar
+    with open("resultado_operacoes_denso.txt", "w", encoding='utf-8') as f:
+        f.write("=== LOG DE AUDITORIA COMPLETA (TODOS OS CENÁRIOS) ===\n\n")
+
+    # LISTA DE CENÁRIOS
     cenarios = [
         {
             "nome": "CENÁRIO 1: O Salto Perfeito (Flash Loan)",
@@ -332,7 +337,7 @@ def rodar_bateria_testes():
         {
             "nome": "CENÁRIO 2: A Formiguinha (Resiliência)",
             "supply": 0.5,
-            "borrow": 0.37, # LTV 74%
+            "borrow": 0.37, 
             "wallet": 0.005,
             "target_supply": 0.8,
             "target_wallet": 0
@@ -340,7 +345,7 @@ def rodar_bateria_testes():
         {
             "nome": "CENÁRIO 3: O Bombeiro (Salvar Risco)",
             "supply": 1.0,
-            "borrow": 0.83, # LTV 83% (Perigo)
+            "borrow": 0.83, 
             "wallet": 0.5,
             "target_supply": 2.0,
             "target_wallet": 0
@@ -357,8 +362,24 @@ def rodar_bateria_testes():
             "nome": "CENÁRIO 5: O Impossível (Sem saldo pra taxa)",
             "supply": 1.0,
             "borrow": 0,
-            "wallet": 0, # Wallet zerada
+            "wallet": 0, 
             "target_supply": 5.0,
+            "target_wallet": 0
+        },
+        {
+            "nome": "CENÁRIO 6: O Estagnado (Sem margem pra operar)",
+            "supply": 2.0,
+            "borrow": 1.5,
+            "wallet": 0.0001,
+            "target_supply": 3.0,
+            "target_wallet": 0
+        },
+        {
+            "nome": "CENÁRIO 7: Pedida do Cliente (Wallet Zerada)",
+            "supply": 1,
+            "borrow": 0,
+            "wallet": 0,
+            "target_supply": 10,
             "target_wallet": 0
         }
     ]
@@ -366,13 +387,16 @@ def rodar_bateria_testes():
     print(f"--- INICIANDO BATERIA DE {len(cenarios)} TESTES ---\n")
 
     for i, dados in enumerate(cenarios):
+        # Escreve um separador no arquivo para ficar bonito
+        with open("resultado_operacoes_denso.txt", "a", encoding='utf-8') as f:
+            f.write(f"\n\n{'='*80}\n")
+            f.write(f"TESTE {i+1}: {dados['nome'].upper()}\n")
+            f.write(f"{'='*80}\n")
+
+        print(f"\n>>>>>>>> INICIANDO: {dados['nome']} <<<<<<<<")
         bot = SimuladorAutomatico(dados)
-        
         bot.rodar()
-        print(f"\n[FIM DO {dados['nome']}]")
-        print("-" * 80)
-        print("-" * 80)
-        print("\n")
+        print(f"[FIM DO {dados['nome']}]")
 
 if __name__ == "__main__":
     rodar_bateria_testes()

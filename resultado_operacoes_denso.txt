@@ -1,3 +1,725 @@
+=== LOG DE AUDITORIA COMPLETA (TODOS OS CENÁRIOS) ===
+
+
+
+================================================================================
+TESTE 1: CENÁRIO 1: O SALTO PERFEITO (FLASH LOAN)
+================================================================================
+
+================================================================================
+CICLO 001 | ESTRATÉGIA: ESTRATÉGIA 3 (FLASH LOAN AGRESSIVO)
+--------------------------------------------------------------------------------
+[1] ANÁLISE DE CENÁRIO
+    > LTV Inicial:        0.0000%
+    > Distância Meta:     0.25000000 BTC
+    > Caixa Disponível:   0.01000000 BTC
+
+[2] EXECUÇÃO DA ESTRATÉGIA
+    > Supply Reciclado:   0.00000000 (Do Acumulado)
+    > Supply Novo/Flash:  0.25000000
+    > Novo Empréstimo:    0.26250000
+    > Repagamento Dívida: 0.00000000
+
+[3] CUSTOS E TAXAS (Discriminação)
+    > Volume Transação:   0.51250000
+    > Taxa Plataforma:    0.00005125
+    > Taxa Flash Loan:    0.00046125
+    > TOTAL TAXAS:        -0.00051250
+
+[4] RESULTADO CONTÁBIL
+    > Lucro Bruto Op:     0.01250000
+    > Variação Wallet:    0.01198750
+    > Acumulado Próx.:    0.00000000
+--------------------------------------------------------------------------------
+[5] ESTADO FINAL DO SISTEMA
+    > SUPPLY TOTAL:       0.35000000
+    > BORROW TOTAL:       0.26250000
+    > WALLET TOTAL:       0.02198750
+    > LTV FINAL:          75.0000%
+    > SAÚDE (HF):         0.9867
+================================================================================
+
+################################################################################
+RELATÓRIO DE CONSOLIDAÇÃO FINAL (BITCOIN STANDARD)
+################################################################################
+METAS:
+  > Supply Alvo:     0.35000000
+  > Wallet Alvo:     0.00000000
+
+RESULTADOS:
+  > Supply Final:    0.35000000
+  > Borrow Final:    0.26250000
+  > Wallet Final:    0.02198750
+
+PERFORMANCE:
+  > Total Ciclos:    1
+  > Status Meta:     [SUCESSO]
+################################################################################
+
+
+================================================================================
+TESTE 2: CENÁRIO 2: A FORMIGUINHA (RESILIÊNCIA)
+================================================================================
+
+================================================================================
+CICLO 001 | ESTRATÉGIA: ESTRATÉGIA 5 (PASSO DE FORMIGA)
+--------------------------------------------------------------------------------
+[1] ANÁLISE DE CENÁRIO
+    > LTV Inicial:        74.0000%
+    > Distância Meta:     0.30000000 BTC
+    > Caixa Disponível:   0.00500000 BTC
+
+[2] EXECUÇÃO DA ESTRATÉGIA
+    > Supply Reciclado:   0.00000000 (Do Acumulado)
+    > Supply Novo/Flash:  0.00000000
+    > Novo Empréstimo:    0.00000000
+    > Repagamento Dívida: 0.00000000
+
+[3] CUSTOS E TAXAS (Discriminação)
+    > Volume Transação:   0.00450000
+    > Taxa Plataforma:    0.00000450
+    > Taxa Flash Loan:    0.00000000
+    > TOTAL TAXAS:        -0.00000450
+
+[4] RESULTADO CONTÁBIL
+    > Lucro Bruto Op:     0.00000000
+    > Variação Wallet:    -0.00000450
+    > Acumulado Próx.:    0.00000000
+--------------------------------------------------------------------------------
+[5] ESTADO FINAL DO SISTEMA
+    > SUPPLY TOTAL:       0.50450000
+    > BORROW TOTAL:       0.37000000
+    > WALLET TOTAL:       0.00499550
+    > LTV FINAL:          73.3399%
+    > SAÚDE (HF):         1.0090
+================================================================================
+
+================================================================================
+CICLO 002 | ESTRATÉGIA: ESTRATÉGIA 5 (PASSO DE FORMIGA)
+--------------------------------------------------------------------------------
+[1] ANÁLISE DE CENÁRIO
+    > LTV Inicial:        73.3399%
+    > Distância Meta:     0.29550000 BTC
+    > Caixa Disponível:   0.00499550 BTC
+
+[2] EXECUÇÃO DA ESTRATÉGIA
+    > Supply Reciclado:   0.00000000 (Do Acumulado)
+    > Supply Novo/Flash:  0.00000000
+    > Novo Empréstimo:    0.00000000
+    > Repagamento Dívida: 0.00000000
+
+[3] CUSTOS E TAXAS (Discriminação)
+    > Volume Transação:   0.00449595
+    > Taxa Plataforma:    0.00000450
+    > Taxa Flash Loan:    0.00000000
+    > TOTAL TAXAS:        -0.00000450
+
+[4] RESULTADO CONTÁBIL
+    > Lucro Bruto Op:     0.00000000
+    > Variação Wallet:    -0.00000450
+    > Acumulado Próx.:    0.00000000
+--------------------------------------------------------------------------------
+[5] ESTADO FINAL DO SISTEMA
+    > SUPPLY TOTAL:       0.50899595
+    > BORROW TOTAL:       0.37000000
+    > WALLET TOTAL:       0.00499100
+    > LTV FINAL:          72.6921%
+    > SAÚDE (HF):         1.0180
+================================================================================
+
+================================================================================
+CICLO 003 | ESTRATÉGIA: ESTRATÉGIA 5 (PASSO DE FORMIGA)
+--------------------------------------------------------------------------------
+[1] ANÁLISE DE CENÁRIO
+    > LTV Inicial:        72.6921%
+    > Distância Meta:     0.29100405 BTC
+    > Caixa Disponível:   0.00499100 BTC
+
+[2] EXECUÇÃO DA ESTRATÉGIA
+    > Supply Reciclado:   0.00000000 (Do Acumulado)
+    > Supply Novo/Flash:  0.00000000
+    > Novo Empréstimo:    0.00000000
+    > Repagamento Dívida: 0.00000000
+
+[3] CUSTOS E TAXAS (Discriminação)
+    > Volume Transação:   0.00449190
+    > Taxa Plataforma:    0.00000449
+    > Taxa Flash Loan:    0.00000000
+    > TOTAL TAXAS:        -0.00000449
+
+[4] RESULTADO CONTÁBIL
+    > Lucro Bruto Op:     0.00000000
+    > Variação Wallet:    -0.00000449
+    > Acumulado Próx.:    0.00000000
+--------------------------------------------------------------------------------
+[5] ESTADO FINAL DO SISTEMA
+    > SUPPLY TOTAL:       0.51348785
+    > BORROW TOTAL:       0.37000000
+    > WALLET TOTAL:       0.00498651
+    > LTV FINAL:          72.0562%
+    > SAÚDE (HF):         1.0270
+================================================================================
+
+================================================================================
+CICLO 004 | ESTRATÉGIA: ESTRATÉGIA 5 (PASSO DE FORMIGA)
+--------------------------------------------------------------------------------
+[1] ANÁLISE DE CENÁRIO
+    > LTV Inicial:        72.0562%
+    > Distância Meta:     0.28651215 BTC
+    > Caixa Disponível:   0.00498651 BTC
+
+[2] EXECUÇÃO DA ESTRATÉGIA
+    > Supply Reciclado:   0.00000000 (Do Acumulado)
+    > Supply Novo/Flash:  0.00000000
+    > Novo Empréstimo:    0.00000000
+    > Repagamento Dívida: 0.00000000
+
+[3] CUSTOS E TAXAS (Discriminação)
+    > Volume Transação:   0.00448786
+    > Taxa Plataforma:    0.00000449
+    > Taxa Flash Loan:    0.00000000
+    > TOTAL TAXAS:        -0.00000449
+
+[4] RESULTADO CONTÁBIL
+    > Lucro Bruto Op:     0.00000000
+    > Variação Wallet:    -0.00000449
+    > Acumulado Próx.:    0.00000000
+--------------------------------------------------------------------------------
+[5] ESTADO FINAL DO SISTEMA
+    > SUPPLY TOTAL:       0.51797571
+    > BORROW TOTAL:       0.37000000
+    > WALLET TOTAL:       0.00498202
+    > LTV FINAL:          71.4319%
+    > SAÚDE (HF):         1.0360
+================================================================================
+
+================================================================================
+CICLO 005 | ESTRATÉGIA: ESTRATÉGIA 5 (PASSO DE FORMIGA)
+--------------------------------------------------------------------------------
+[1] ANÁLISE DE CENÁRIO
+    > LTV Inicial:        71.4319%
+    > Distância Meta:     0.28202429 BTC
+    > Caixa Disponível:   0.00498202 BTC
+
+[2] EXECUÇÃO DA ESTRATÉGIA
+    > Supply Reciclado:   0.00000000 (Do Acumulado)
+    > Supply Novo/Flash:  0.00000000
+    > Novo Empréstimo:    0.00000000
+    > Repagamento Dívida: 0.00000000
+
+[3] CUSTOS E TAXAS (Discriminação)
+    > Volume Transação:   0.00448382
+    > Taxa Plataforma:    0.00000448
+    > Taxa Flash Loan:    0.00000000
+    > TOTAL TAXAS:        -0.00000448
+
+[4] RESULTADO CONTÁBIL
+    > Lucro Bruto Op:     0.00000000
+    > Variação Wallet:    -0.00000448
+    > Acumulado Próx.:    0.00000000
+--------------------------------------------------------------------------------
+[5] ESTADO FINAL DO SISTEMA
+    > SUPPLY TOTAL:       0.52245954
+    > BORROW TOTAL:       0.37000000
+    > WALLET TOTAL:       0.00497754
+    > LTV FINAL:          70.8189%
+    > SAÚDE (HF):         1.0449
+================================================================================
+
+================================================================================
+CICLO 006 | ESTRATÉGIA: ESTRATÉGIA 5 (PASSO DE FORMIGA)
+--------------------------------------------------------------------------------
+[1] ANÁLISE DE CENÁRIO
+    > LTV Inicial:        70.8189%
+    > Distância Meta:     0.27754046 BTC
+    > Caixa Disponível:   0.00497754 BTC
+
+[2] EXECUÇÃO DA ESTRATÉGIA
+    > Supply Reciclado:   0.00000000 (Do Acumulado)
+    > Supply Novo/Flash:  0.00000000
+    > Novo Empréstimo:    0.00000000
+    > Repagamento Dívida: 0.00000000
+
+[3] CUSTOS E TAXAS (Discriminação)
+    > Volume Transação:   0.00447979
+    > Taxa Plataforma:    0.00000448
+    > Taxa Flash Loan:    0.00000000
+    > TOTAL TAXAS:        -0.00000448
+
+[4] RESULTADO CONTÁBIL
+    > Lucro Bruto Op:     0.00000000
+    > Variação Wallet:    -0.00000448
+    > Acumulado Próx.:    0.00000000
+--------------------------------------------------------------------------------
+[5] ESTADO FINAL DO SISTEMA
+    > SUPPLY TOTAL:       0.52693932
+    > BORROW TOTAL:       0.37000000
+    > WALLET TOTAL:       0.00497306
+    > LTV FINAL:          70.2168%
+    > SAÚDE (HF):         1.0539
+================================================================================
+
+================================================================================
+CICLO 007 | ESTRATÉGIA: ESTRATÉGIA 5 (PASSO DE FORMIGA)
+--------------------------------------------------------------------------------
+[1] ANÁLISE DE CENÁRIO
+    > LTV Inicial:        70.2168%
+    > Distância Meta:     0.27306068 BTC
+    > Caixa Disponível:   0.00497306 BTC
+
+[2] EXECUÇÃO DA ESTRATÉGIA
+    > Supply Reciclado:   0.00000000 (Do Acumulado)
+    > Supply Novo/Flash:  0.00000000
+    > Novo Empréstimo:    0.00000000
+    > Repagamento Dívida: 0.00000000
+
+[3] CUSTOS E TAXAS (Discriminação)
+    > Volume Transação:   0.00447575
+    > Taxa Plataforma:    0.00000448
+    > Taxa Flash Loan:    0.00000000
+    > TOTAL TAXAS:        -0.00000448
+
+[4] RESULTADO CONTÁBIL
+    > Lucro Bruto Op:     0.00000000
+    > Variação Wallet:    -0.00000448
+    > Acumulado Próx.:    0.00000000
+--------------------------------------------------------------------------------
+[5] ESTADO FINAL DO SISTEMA
+    > SUPPLY TOTAL:       0.53141508
+    > BORROW TOTAL:       0.37000000
+    > WALLET TOTAL:       0.00496858
+    > LTV FINAL:          69.6254%
+    > SAÚDE (HF):         1.0628
+================================================================================
+
+================================================================================
+CICLO 008 | ESTRATÉGIA: ESTRATÉGIA 5 (PASSO DE FORMIGA)
+--------------------------------------------------------------------------------
+[1] ANÁLISE DE CENÁRIO
+    > LTV Inicial:        69.6254%
+    > Distância Meta:     0.26858492 BTC
+    > Caixa Disponível:   0.00496858 BTC
+
+[2] EXECUÇÃO DA ESTRATÉGIA
+    > Supply Reciclado:   0.00000000 (Do Acumulado)
+    > Supply Novo/Flash:  0.00000000
+    > Novo Empréstimo:    0.00000000
+    > Repagamento Dívida: 0.00000000
+
+[3] CUSTOS E TAXAS (Discriminação)
+    > Volume Transação:   0.00447173
+    > Taxa Plataforma:    0.00000447
+    > Taxa Flash Loan:    0.00000000
+    > TOTAL TAXAS:        -0.00000447
+
+[4] RESULTADO CONTÁBIL
+    > Lucro Bruto Op:     0.00000000
+    > Variação Wallet:    -0.00000447
+    > Acumulado Próx.:    0.00000000
+--------------------------------------------------------------------------------
+[5] ESTADO FINAL DO SISTEMA
+    > SUPPLY TOTAL:       0.53588680
+    > BORROW TOTAL:       0.37000000
+    > WALLET TOTAL:       0.00496411
+    > LTV FINAL:          69.0444%
+    > SAÚDE (HF):         1.0718
+================================================================================
+
+================================================================================
+CICLO 009 | ESTRATÉGIA: ESTRATÉGIA 5 (PASSO DE FORMIGA)
+--------------------------------------------------------------------------------
+[1] ANÁLISE DE CENÁRIO
+    > LTV Inicial:        69.0444%
+    > Distância Meta:     0.26411320 BTC
+    > Caixa Disponível:   0.00496411 BTC
+
+[2] EXECUÇÃO DA ESTRATÉGIA
+    > Supply Reciclado:   0.00000000 (Do Acumulado)
+    > Supply Novo/Flash:  0.00000000
+    > Novo Empréstimo:    0.00000000
+    > Repagamento Dívida: 0.00000000
+
+[3] CUSTOS E TAXAS (Discriminação)
+    > Volume Transação:   0.00446770
+    > Taxa Plataforma:    0.00000447
+    > Taxa Flash Loan:    0.00000000
+    > TOTAL TAXAS:        -0.00000447
+
+[4] RESULTADO CONTÁBIL
+    > Lucro Bruto Op:     0.00000000
+    > Variação Wallet:    -0.00000447
+    > Acumulado Próx.:    0.00000000
+--------------------------------------------------------------------------------
+[5] ESTADO FINAL DO SISTEMA
+    > SUPPLY TOTAL:       0.54035451
+    > BORROW TOTAL:       0.37000000
+    > WALLET TOTAL:       0.00495965
+    > LTV FINAL:          68.4736%
+    > SAÚDE (HF):         1.0807
+================================================================================
+
+================================================================================
+CICLO 010 | ESTRATÉGIA: ESTRATÉGIA 5 (PASSO DE FORMIGA)
+--------------------------------------------------------------------------------
+[1] ANÁLISE DE CENÁRIO
+    > LTV Inicial:        68.4736%
+    > Distância Meta:     0.25964549 BTC
+    > Caixa Disponível:   0.00495965 BTC
+
+[2] EXECUÇÃO DA ESTRATÉGIA
+    > Supply Reciclado:   0.00000000 (Do Acumulado)
+    > Supply Novo/Flash:  0.00000000
+    > Novo Empréstimo:    0.00000000
+    > Repagamento Dívida: 0.00000000
+
+[3] CUSTOS E TAXAS (Discriminação)
+    > Volume Transação:   0.00446368
+    > Taxa Plataforma:    0.00000446
+    > Taxa Flash Loan:    0.00000000
+    > TOTAL TAXAS:        -0.00000446
+
+[4] RESULTADO CONTÁBIL
+    > Lucro Bruto Op:     0.00000000
+    > Variação Wallet:    -0.00000446
+    > Acumulado Próx.:    0.00000000
+--------------------------------------------------------------------------------
+[5] ESTADO FINAL DO SISTEMA
+    > SUPPLY TOTAL:       0.54481819
+    > BORROW TOTAL:       0.37000000
+    > WALLET TOTAL:       0.00495518
+    > LTV FINAL:          67.9126%
+    > SAÚDE (HF):         1.0896
+================================================================================
+
+================================================================================
+CICLO 011 | ESTRATÉGIA: ESTRATÉGIA 5 (PASSO DE FORMIGA)
+--------------------------------------------------------------------------------
+[1] ANÁLISE DE CENÁRIO
+    > LTV Inicial:        67.9126%
+    > Distância Meta:     0.25518181 BTC
+    > Caixa Disponível:   0.00495518 BTC
+
+[2] EXECUÇÃO DA ESTRATÉGIA
+    > Supply Reciclado:   0.00000000 (Do Acumulado)
+    > Supply Novo/Flash:  0.00000000
+    > Novo Empréstimo:    0.00000000
+    > Repagamento Dívida: 0.00000000
+
+[3] CUSTOS E TAXAS (Discriminação)
+    > Volume Transação:   0.00445966
+    > Taxa Plataforma:    0.00000446
+    > Taxa Flash Loan:    0.00000000
+    > TOTAL TAXAS:        -0.00000446
+
+[4] RESULTADO CONTÁBIL
+    > Lucro Bruto Op:     0.00000000
+    > Variação Wallet:    -0.00000446
+    > Acumulado Próx.:    0.00000000
+--------------------------------------------------------------------------------
+[5] ESTADO FINAL DO SISTEMA
+    > SUPPLY TOTAL:       0.54927785
+    > BORROW TOTAL:       0.37000000
+    > WALLET TOTAL:       0.00495072
+    > LTV FINAL:          67.3612%
+    > SAÚDE (HF):         1.0986
+================================================================================
+
+================================================================================
+CICLO 012 | ESTRATÉGIA: ESTRATÉGIA 5 (PASSO DE FORMIGA)
+--------------------------------------------------------------------------------
+[1] ANÁLISE DE CENÁRIO
+    > LTV Inicial:        67.3612%
+    > Distância Meta:     0.25072215 BTC
+    > Caixa Disponível:   0.00495072 BTC
+
+[2] EXECUÇÃO DA ESTRATÉGIA
+    > Supply Reciclado:   0.00000000 (Do Acumulado)
+    > Supply Novo/Flash:  0.00000000
+    > Novo Empréstimo:    0.00000000
+    > Repagamento Dívida: 0.00000000
+
+[3] CUSTOS E TAXAS (Discriminação)
+    > Volume Transação:   0.00445565
+    > Taxa Plataforma:    0.00000446
+    > Taxa Flash Loan:    0.00000000
+    > TOTAL TAXAS:        -0.00000446
+
+[4] RESULTADO CONTÁBIL
+    > Lucro Bruto Op:     0.00000000
+    > Variação Wallet:    -0.00000446
+    > Acumulado Próx.:    0.00000000
+--------------------------------------------------------------------------------
+[5] ESTADO FINAL DO SISTEMA
+    > SUPPLY TOTAL:       0.55373350
+    > BORROW TOTAL:       0.37000000
+    > WALLET TOTAL:       0.00494627
+    > LTV FINAL:          66.8191%
+    > SAÚDE (HF):         1.1075
+================================================================================
+
+================================================================================
+CICLO 013 | ESTRATÉGIA: ESTRATÉGIA 5 (PASSO DE FORMIGA)
+--------------------------------------------------------------------------------
+[1] ANÁLISE DE CENÁRIO
+    > LTV Inicial:        66.8191%
+    > Distância Meta:     0.24626650 BTC
+    > Caixa Disponível:   0.00494627 BTC
+
+[2] EXECUÇÃO DA ESTRATÉGIA
+    > Supply Reciclado:   0.00000000 (Do Acumulado)
+    > Supply Novo/Flash:  0.00000000
+    > Novo Empréstimo:    0.00000000
+    > Repagamento Dívida: 0.00000000
+
+[3] CUSTOS E TAXAS (Discriminação)
+    > Volume Transação:   0.00445164
+    > Taxa Plataforma:    0.00000445
+    > Taxa Flash Loan:    0.00000000
+    > TOTAL TAXAS:        -0.00000445
+
+[4] RESULTADO CONTÁBIL
+    > Lucro Bruto Op:     0.00000000
+    > Variação Wallet:    -0.00000445
+    > Acumulado Próx.:    0.00000000
+--------------------------------------------------------------------------------
+[5] ESTADO FINAL DO SISTEMA
+    > SUPPLY TOTAL:       0.55818514
+    > BORROW TOTAL:       0.37000000
+    > WALLET TOTAL:       0.00494181
+    > LTV FINAL:          66.2863%
+    > SAÚDE (HF):         1.1164
+================================================================================
+
+================================================================================
+CICLO 014 | ESTRATÉGIA: ESTRATÉGIA 5 (PASSO DE FORMIGA)
+--------------------------------------------------------------------------------
+[1] ANÁLISE DE CENÁRIO
+    > LTV Inicial:        66.2863%
+    > Distância Meta:     0.24181486 BTC
+    > Caixa Disponível:   0.00494181 BTC
+
+[2] EXECUÇÃO DA ESTRATÉGIA
+    > Supply Reciclado:   0.00000000 (Do Acumulado)
+    > Supply Novo/Flash:  0.00000000
+    > Novo Empréstimo:    0.00000000
+    > Repagamento Dívida: 0.00000000
+
+[3] CUSTOS E TAXAS (Discriminação)
+    > Volume Transação:   0.00444763
+    > Taxa Plataforma:    0.00000445
+    > Taxa Flash Loan:    0.00000000
+    > TOTAL TAXAS:        -0.00000445
+
+[4] RESULTADO CONTÁBIL
+    > Lucro Bruto Op:     0.00000000
+    > Variação Wallet:    -0.00000445
+    > Acumulado Próx.:    0.00000000
+--------------------------------------------------------------------------------
+[5] ESTADO FINAL DO SISTEMA
+    > SUPPLY TOTAL:       0.56263277
+    > BORROW TOTAL:       0.37000000
+    > WALLET TOTAL:       0.00493737
+    > LTV FINAL:          65.7623%
+    > SAÚDE (HF):         1.1253
+================================================================================
+
+================================================================================
+CICLO 015 | ESTRATÉGIA: ESTRATÉGIA 5 (PASSO DE FORMIGA)
+--------------------------------------------------------------------------------
+[1] ANÁLISE DE CENÁRIO
+    > LTV Inicial:        65.7623%
+    > Distância Meta:     0.23736723 BTC
+    > Caixa Disponível:   0.00493737 BTC
+
+[2] EXECUÇÃO DA ESTRATÉGIA
+    > Supply Reciclado:   0.00000000 (Do Acumulado)
+    > Supply Novo/Flash:  0.00000000
+    > Novo Empréstimo:    0.00000000
+    > Repagamento Dívida: 0.00000000
+
+[3] CUSTOS E TAXAS (Discriminação)
+    > Volume Transação:   0.00444363
+    > Taxa Plataforma:    0.00000444
+    > Taxa Flash Loan:    0.00000000
+    > TOTAL TAXAS:        -0.00000444
+
+[4] RESULTADO CONTÁBIL
+    > Lucro Bruto Op:     0.00000000
+    > Variação Wallet:    -0.00000444
+    > Acumulado Próx.:    0.00000000
+--------------------------------------------------------------------------------
+[5] ESTADO FINAL DO SISTEMA
+    > SUPPLY TOTAL:       0.56707640
+    > BORROW TOTAL:       0.37000000
+    > WALLET TOTAL:       0.00493292
+    > LTV FINAL:          65.2469%
+    > SAÚDE (HF):         1.1342
+================================================================================
+
+################################################################################
+RELATÓRIO DE CONSOLIDAÇÃO FINAL (BITCOIN STANDARD)
+################################################################################
+METAS:
+  > Supply Alvo:     0.80000000
+  > Wallet Alvo:     0.00000000
+
+RESULTADOS:
+  > Supply Final:    0.56707640
+  > Borrow Final:    0.37000000
+  > Wallet Final:    0.00493292
+
+PERFORMANCE:
+  > Total Ciclos:    15
+  > Status Meta:     [PARCIAL]
+################################################################################
+
+
+================================================================================
+TESTE 3: CENÁRIO 3: O BOMBEIRO (SALVAR RISCO)
+================================================================================
+
+================================================================================
+CICLO 001 | ESTRATÉGIA: ESTRATÉGIA 7 (REPAGAMENTO SEGURO)
+--------------------------------------------------------------------------------
+[1] ANÁLISE DE CENÁRIO
+    > LTV Inicial:        83.0000%
+    > Distância Meta:     1.00000000 BTC
+    > Caixa Disponível:   0.50000000 BTC
+
+[2] EXECUÇÃO DA ESTRATÉGIA
+    > Supply Reciclado:   0.00000000 (Do Acumulado)
+    > Supply Novo/Flash:  0.00000000
+    > Novo Empréstimo:    0.00000000
+    > Repagamento Dívida: 0.49925112
+
+[3] CUSTOS E TAXAS (Discriminação)
+    > Volume Transação:   0.49925112
+    > Taxa Plataforma:    0.00049925
+    > Taxa Flash Loan:    0.00000000
+    > TOTAL TAXAS:        -0.00049925
+
+[4] RESULTADO CONTÁBIL
+    > Lucro Bruto Op:     0.00000000
+    > Variação Wallet:    -0.49975037
+    > Acumulado Próx.:    0.00000000
+--------------------------------------------------------------------------------
+[5] ESTADO FINAL DO SISTEMA
+    > SUPPLY TOTAL:       1.00000000
+    > BORROW TOTAL:       0.33074888
+    > WALLET TOTAL:       0.00024963
+    > LTV FINAL:          33.0749%
+    > SAÚDE (HF):         2.2373
+================================================================================
+
+================================================================================
+CICLO 002 | ESTRATÉGIA: ESTRATÉGIA 3 (FLASH LOAN AGRESSIVO)
+--------------------------------------------------------------------------------
+[1] ANÁLISE DE CENÁRIO
+    > LTV Inicial:        33.0749%
+    > Distância Meta:     1.00000000 BTC
+    > Caixa Disponível:   0.00024963 BTC
+
+[2] EXECUÇÃO DA ESTRATÉGIA
+    > Supply Reciclado:   0.00000000 (Do Acumulado)
+    > Supply Novo/Flash:  1.00000000
+    > Novo Empréstimo:    1.16925112
+    > Repagamento Dívida: 0.00000000
+
+[3] CUSTOS E TAXAS (Discriminação)
+    > Volume Transação:   2.16925112
+    > Taxa Plataforma:    0.00021693
+    > Taxa Flash Loan:    0.00195233
+    > TOTAL TAXAS:        -0.00216925
+
+[4] RESULTADO CONTÁBIL
+    > Lucro Bruto Op:     0.16925112
+    > Variação Wallet:    0.16708187
+    > Acumulado Próx.:    0.00000000
+--------------------------------------------------------------------------------
+[5] ESTADO FINAL DO SISTEMA
+    > SUPPLY TOTAL:       2.00000000
+    > BORROW TOTAL:       1.50000000
+    > WALLET TOTAL:       0.16733150
+    > LTV FINAL:          75.0000%
+    > SAÚDE (HF):         0.9867
+================================================================================
+
+################################################################################
+RELATÓRIO DE CONSOLIDAÇÃO FINAL (BITCOIN STANDARD)
+################################################################################
+METAS:
+  > Supply Alvo:     2.00000000
+  > Wallet Alvo:     0.00000000
+
+RESULTADOS:
+  > Supply Final:    2.00000000
+  > Borrow Final:    1.50000000
+  > Wallet Final:    0.16733150
+
+PERFORMANCE:
+  > Total Ciclos:    2
+  > Status Meta:     [SUCESSO]
+################################################################################
+
+
+================================================================================
+TESTE 4: CENÁRIO 4: A CAIXA REGISTRADORA (EXTRAIR LUCRO)
+================================================================================
+
+================================================================================
+CICLO 001 | ESTRATÉGIA: ESTRATÉGIA 1 (SACAR LUCRO)
+--------------------------------------------------------------------------------
+[1] ANÁLISE DE CENÁRIO
+    > LTV Inicial:        0.0000%
+    > Distância Meta:     0.00000000 BTC
+    > Caixa Disponível:   0.00000000 BTC
+
+[2] EXECUÇÃO DA ESTRATÉGIA
+    > Supply Reciclado:   0.00000000 (Do Acumulado)
+    > Supply Novo/Flash:  0.00000000
+    > Novo Empréstimo:    7.50000000
+    > Repagamento Dívida: 0.00000000
+
+[3] CUSTOS E TAXAS (Discriminação)
+    > Volume Transação:   7.50000000
+    > Taxa Plataforma:    0.00750000
+    > Taxa Flash Loan:    0.00000000
+    > TOTAL TAXAS:        -0.00750000
+
+[4] RESULTADO CONTÁBIL
+    > Lucro Bruto Op:     7.50000000
+    > Variação Wallet:    7.49250000
+    > Acumulado Próx.:    0.00000000
+--------------------------------------------------------------------------------
+[5] ESTADO FINAL DO SISTEMA
+    > SUPPLY TOTAL:       10.00000000
+    > BORROW TOTAL:       7.50000000
+    > WALLET TOTAL:       7.49250000
+    > LTV FINAL:          75.0000%
+    > SAÚDE (HF):         0.9867
+================================================================================
+
+################################################################################
+RELATÓRIO DE CONSOLIDAÇÃO FINAL (BITCOIN STANDARD)
+################################################################################
+METAS:
+  > Supply Alvo:     10.00000000
+  > Wallet Alvo:     5.00000000
+
+RESULTADOS:
+  > Supply Final:    10.00000000
+  > Borrow Final:    7.50000000
+  > Wallet Final:    7.49250000
+
+PERFORMANCE:
+  > Total Ciclos:    1
+  > Status Meta:     [SUCESSO]
+################################################################################
+
+
+================================================================================
+TESTE 5: CENÁRIO 5: O IMPOSSÍVEL (SEM SALDO PRA TAXA)
+================================================================================
 
 ================================================================================
 CICLO 001 | ESTRATÉGIA: ESTRATÉGIA 5 (PASSO DE FORMIGA)
@@ -37,6 +759,116 @@ RELATÓRIO DE CONSOLIDAÇÃO FINAL (BITCOIN STANDARD)
 ################################################################################
 METAS:
   > Supply Alvo:     5.00000000
+  > Wallet Alvo:     0.00000000
+
+RESULTADOS:
+  > Supply Final:    1.00000000
+  > Borrow Final:    0.00000000
+  > Wallet Final:    0.00000000
+
+PERFORMANCE:
+  > Total Ciclos:    1
+  > Status Meta:     [PARCIAL]
+################################################################################
+
+
+================================================================================
+TESTE 6: CENÁRIO 6: O ESTAGNADO (SEM MARGEM PRA OPERAR)
+================================================================================
+
+================================================================================
+CICLO 001 | ESTRATÉGIA: ESTRATÉGIA 1 (SACAR LUCRO)
+--------------------------------------------------------------------------------
+[1] ANÁLISE DE CENÁRIO
+    > LTV Inicial:        75.0000%
+    > Distância Meta:     1.00000000 BTC
+    > Caixa Disponível:   0.00010000 BTC
+
+[2] EXECUÇÃO DA ESTRATÉGIA
+    > Supply Reciclado:   0.00000000 (Do Acumulado)
+    > Supply Novo/Flash:  0.00000000
+    > Novo Empréstimo:    0.00000000
+    > Repagamento Dívida: 0.00000000
+
+[3] CUSTOS E TAXAS (Discriminação)
+    > Volume Transação:   0.00000000
+    > Taxa Plataforma:    0.00000000
+    > Taxa Flash Loan:    0.00000000
+    > TOTAL TAXAS:        -0.00000000
+
+[4] RESULTADO CONTÁBIL
+    > Lucro Bruto Op:     0.00000000
+    > Variação Wallet:    0.00000000
+    > Acumulado Próx.:    0.00000000
+--------------------------------------------------------------------------------
+[5] ESTADO FINAL DO SISTEMA
+    > SUPPLY TOTAL:       2.00000000
+    > BORROW TOTAL:       1.50000000
+    > WALLET TOTAL:       0.00010000
+    > LTV FINAL:          75.0000%
+    > SAÚDE (HF):         0.9867
+================================================================================
+
+################################################################################
+RELATÓRIO DE CONSOLIDAÇÃO FINAL (BITCOIN STANDARD)
+################################################################################
+METAS:
+  > Supply Alvo:     3.00000000
+  > Wallet Alvo:     0.00000000
+
+RESULTADOS:
+  > Supply Final:    2.00000000
+  > Borrow Final:    1.50000000
+  > Wallet Final:    0.00010000
+
+PERFORMANCE:
+  > Total Ciclos:    1
+  > Status Meta:     [PARCIAL]
+################################################################################
+
+
+================================================================================
+TESTE 7: CENÁRIO 7: PEDIDA DO CLIENTE (WALLET ZERADA)
+================================================================================
+
+================================================================================
+CICLO 001 | ESTRATÉGIA: ESTRATÉGIA 5 (PASSO DE FORMIGA)
+--------------------------------------------------------------------------------
+[1] ANÁLISE DE CENÁRIO
+    > LTV Inicial:        0.0000%
+    > Distância Meta:     9.00000000 BTC
+    > Caixa Disponível:   0.00000000 BTC
+
+[2] EXECUÇÃO DA ESTRATÉGIA
+    > Supply Reciclado:   0.00000000 (Do Acumulado)
+    > Supply Novo/Flash:  0.00000000
+    > Novo Empréstimo:    0.00000000
+    > Repagamento Dívida: 0.00000000
+
+[3] CUSTOS E TAXAS (Discriminação)
+    > Volume Transação:   0.00000000
+    > Taxa Plataforma:    0.00000000
+    > Taxa Flash Loan:    0.00000000
+    > TOTAL TAXAS:        -0.00000000
+
+[4] RESULTADO CONTÁBIL
+    > Lucro Bruto Op:     0.00000000
+    > Variação Wallet:    0.00000000
+    > Acumulado Próx.:    0.00000000
+--------------------------------------------------------------------------------
+[5] ESTADO FINAL DO SISTEMA
+    > SUPPLY TOTAL:       1.00000000
+    > BORROW TOTAL:       0.00000000
+    > WALLET TOTAL:       0.00000000
+    > LTV FINAL:          0.0000%
+    > SAÚDE (HF):         999.0000
+================================================================================
+
+################################################################################
+RELATÓRIO DE CONSOLIDAÇÃO FINAL (BITCOIN STANDARD)
+################################################################################
+METAS:
+  > Supply Alvo:     10.00000000
   > Wallet Alvo:     0.00000000
 
 RESULTADOS:
