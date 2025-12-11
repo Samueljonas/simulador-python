@@ -55,34 +55,43 @@ class SimuladorDeFi:
         }
 
     def _estrategia_3_flash_loan(self):
-        """Tenta alavancagem máxima via Flash Loan."""
-        # Calcular salto ideal
+        """Tenta alavancagem máxima (Flash Loan)."""
         capacidade_total = (self.supply + self.supply_acumulado) / (1 - self.TARGET_LTV)
         capacidade_total = min(capacidade_total, self.target_supply)
         
-        delta_supply = max(0, capacidade_total - self.supply)
+        delta_supply_ideal = max(0, capacidade_total - self.supply)
         novo_borrow_total = capacidade_total * self.TARGET_LTV
-        delta_borrow = max(0, novo_borrow_total - self.borrow)
+        delta_borrow_ideal = max(0, novo_borrow_total - self.borrow)
         
-        taxas_estimadas = (delta_borrow + delta_supply) * self.TAXA_PLATAFORMA
-        lucro_bruto = delta_borrow - delta_supply
+        taxas_estimadas = (delta_borrow_ideal + delta_supply_ideal) * self.TAXA_PLATAFORMA
+        lucro_bruto = delta_borrow_ideal - delta_supply_ideal
         
-        # Verifica viabilidade
-        pode_pagar_com_lucro = lucro_bruto > taxas_estimadas
-        pode_pagar_com_wallet = self.wallet > (taxas_estimadas - lucro_bruto)
+        op_reinvest = delta_supply_ideal
+        op_borrow = delta_borrow_ideal
+        op_lucro_sacado = lucro_bruto
         
-        if delta_supply > 0.001 and (pode_pagar_com_lucro or pode_pagar_com_wallet):
+        # Ajuste Self-Funding: deduz taxas do reinvestimento se wallet insuficiente
+        if (self.wallet + lucro_bruto) < taxas_estimadas:
+            print(f"  > [AUTO-AJUSTE] Wallet zerada. Deduzindo taxas do reinvestimento...")
+            
+            deficit = taxas_estimadas - (self.wallet + lucro_bruto)
+            op_reinvest -= (deficit * 1.01) 
+            op_lucro_sacado = taxas_estimadas 
+            
+            if op_reinvest <= 0:
+                 print(f"  > [FALHA] Impossível cobrir taxas mesmo reduzindo operação.")
+                 return self._estrategia_5_reinvestir_acumulado(fallback=True)
+
+        if op_reinvest > 0.00000001:
             return {
                 "supply": 0.0,
-                "borrow": delta_borrow,
+                "borrow": op_borrow,
                 "repay": 0.0,
-                "reinvest": delta_supply,
-                "lucro_sacado": lucro_bruto, 
-                "nome": "Estratégia 3 (Flash Loan Agressivo)"
+                "reinvest": op_reinvest, 
+                "lucro_sacado": op_lucro_sacado, 
+                "nome": "Estratégia 3 (Flash Loan Self-Funded)"
             }
         else:
-            # Fallback para estratégia conservadora
-            print(f"  > [AVISO] Flash Loan caro demais. Ativando Plano B (Formiguinha)...")
             return self._estrategia_5_reinvestir_acumulado(fallback=True)
 
     def _estrategia_5_reinvestir_acumulado(self, fallback=False):
@@ -90,7 +99,6 @@ class SimuladorDeFi:
         
         op_supply = self.supply_acumulado
         
-        # Se for fallback e não tiver acumulado, usa a wallet
         if fallback and op_supply == 0 and self.wallet > 0:
             op_supply = self.wallet * 0.90
             
@@ -106,7 +114,6 @@ class SimuladorDeFi:
     def _estrategia_7_repagar_inteligente(self):
         caixa_total = self.supply_acumulado + self.wallet
         
-        # Reserva dinheiro para a taxa com folga
         valor_maximo_repagavel = caixa_total / (1 + self.TAXA_PLATAFORMA * 1.5)
         
         op_repay = min(self.borrow, valor_maximo_repagavel)
@@ -127,68 +134,55 @@ class SimuladorDeFi:
         ltv = self.borrow / self.supply if self.supply > 0 else 0
         falta_supply = self.target_supply - self.supply
         
-        # 1. Risco Crítico
         if ltv > self.MAX_LTV_RISCO:
             return self._estrategia_7_repagar_inteligente()
         
-        # 2. Fase de Crescimento (Longe da meta + Margem saudável)
         if falta_supply > (self.supply * 0.05) and ltv < self.TARGET_LTV:
             return self._estrategia_3_flash_loan()
             
-        # 3. Fase de Lucro/Estabilidade
         if ltv < self.TARGET_LTV:
             return self._estrategia_1_sacar_lucro()
             
-        # 4. Estagnação (LTV cheio)
         if self.supply_acumulado > 0:
             return self._estrategia_5_reinvestir_acumulado()
             
-        # 5. Tentativa Final (Espremer a wallet)
         return self._estrategia_1_sacar_lucro()
 
     def executar_ciclo(self):
         self.ciclos += 1
         
-        # Análise prévia
         ltv_pre = (self.borrow / self.supply * 100) if self.supply > 0 else 0
         falta_meta = max(0, self.target_supply - self.supply)
         
         plano = self.decidir_proximo_passo()
         
-        # Recuperar valores
         op_supply = plano['supply']
         op_borrow = plano['borrow']
         op_repay = plano['repay']
         op_reinvest = plano['reinvest']
         op_lucro_sacado = plano['lucro_sacado']
         
-        # Consumir acumulado
         supply_usado_neste_ciclo = self.supply_acumulado if plano['nome'] != "Estratégia 3" else 0
         self.supply_acumulado = 0 
         
-        # Cálculos financeiros
         volume_total = op_borrow + op_repay + op_reinvest + op_supply
         taxas = volume_total * self.TAXA_PLATAFORMA
         
-        # Separação visual de taxas
         taxa_flash_est = 0.0
         if "Flash Loan" in plano['nome']:
             taxa_flash_est = taxas * 0.9
             
         delta_wallet = op_lucro_sacado - taxas
         
-        # Ajuste para repagamento
         if plano['nome'] == "Estratégia 7 (Repagamento Seguro)":
             custo_repay = max(0, op_repay - supply_usado_neste_ciclo)
             delta_wallet -= custo_repay
 
-        # Verificação de segurança
         if self.wallet + delta_wallet < -0.00000001:
             print(f"  > [CRÍTICO] Abortar ciclo {self.ciclos}. Wallet insuficiente.")
             self.supply_acumulado = supply_usado_neste_ciclo
             return False 
         
-        # COMMIT
         old_wallet = self.wallet
         self.wallet += delta_wallet
         self.supply += (op_supply + op_reinvest)
@@ -198,7 +192,6 @@ class SimuladorDeFi:
         if plano['nome'] not in ["Estratégia 1 (Sacar Lucro)", "Estratégia 3 (Flash Loan Agressivo)"]:
              self.supply_acumulado += max(0, delta_wallet)
 
-        # Logs
         ltv_pos = (self.borrow / self.supply * 100) if self.supply > 0 else 0
         saude = (self.supply * 0.74) / self.borrow if self.borrow > 0 else 999.0
         
@@ -320,11 +313,9 @@ class SimuladorAutomatico(SimuladorDeFi):
         self.target_wallet = float(self.dados_teste['target_wallet'])
 
 def rodar_bateria_testes():
-    # 1. Limpar o arquivo de log antigo antes de começar
     with open("resultado_operacoes_denso.txt", "w", encoding='utf-8') as f:
         f.write("=== LOG DE AUDITORIA COMPLETA (TODOS OS CENÁRIOS) ===\n\n")
 
-    # LISTA DE CENÁRIOS
     cenarios = [
         {
             "nome": "CENÁRIO 1: O Salto Perfeito (Flash Loan)",
@@ -387,7 +378,6 @@ def rodar_bateria_testes():
     print(f"--- INICIANDO BATERIA DE {len(cenarios)} TESTES ---\n")
 
     for i, dados in enumerate(cenarios):
-        # Escreve um separador no arquivo para ficar bonito
         with open("resultado_operacoes_denso.txt", "a", encoding='utf-8') as f:
             f.write(f"\n\n{'='*80}\n")
             f.write(f"TESTE {i+1}: {dados['nome'].upper()}\n")
